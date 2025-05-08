@@ -1,28 +1,37 @@
 package it.uniroma3.diadia.ambienti;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class LabirintoTest {
-	private final Labirinto l = new Labirinto();
-	private final Stanza si = new Stanza("Atrio");
-	private final Stanza sd = new Stanza("Stanza diversa");
-	private final Stanza sv = new Stanza("Biblioteca");
-	
-	@Test
-	public void testGetStanzaIniziale() {
-		assertEquals(si.getNome(), l.getStanzaIniziale().getNome());
+	Labirinto l;
+	Stanza biblioteca;
+	Stanza DS1;
+
+	@Before
+	public void setUp() {
+		l = new Labirinto();
+		l.creaStanze();
+		biblioteca = new Stanza("Biblioteca");
+		DS1 = new Stanza("DS1");
 	}
-	
+
+
 	@Test
 	public void testGetStanzaVincente() {
-		assertEquals(sv.getNome(), l.getStanzaVincente().getNome());
+		assertEquals("Biblioteca", l.getStanzaVincente().getNome());
 	}
-	
+
+
 	@Test
-	public void testStanzaInzialeDiversoAtrio() {
-		assertFalse(l.getStanzaIniziale().getNome()== sd.getNome());
+	public void testSetStanzaCorrente() {
+		l.setStanzaCorrente(DS1);
+		assertEquals(DS1, l.getStanzaCorrente());
 	}
-	
-	
+	@Test
+	public void testGetStanzaCorrente() {
+		assertEquals("Atrio", l.getStanzaCorrente().getNome());
+	}
+
 }
